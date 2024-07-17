@@ -19,11 +19,12 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_up"):
 		direction.y -= 1
 		
-	if Input.is_action_pressed("ui_right")||Input.is_action_pressed("ui_left" )|| \
-	Input.is_action_pressed("ui_down")||Input.is_action_pressed("ui_up"):
+	if direction == Vector2(0,0):
+		animated_sprite.play("idle")
+	else:
+		if direction.x != 0:
+			animated_sprite.flip_h = direction.x == -1
 		animated_sprite.play("walk")
-	else: 
-		animated_sprite.stop()
 	
 	# Normalize the direction vector to prevent faster diagonal movement
 	direction = direction.normalized()

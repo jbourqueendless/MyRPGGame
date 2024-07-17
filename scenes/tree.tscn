@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bdo2b373wcrs2"]
 
 [ext_resource type="Texture2D" uid="uid://dqpqmvynv1rfk" path="res://assets/Tiny Swords (Update 010)/Resources/Trees/Tree.png" id="1_6fg6k"]
-[ext_resource type="Script" path="res://Area2D.gd" id="1_u6csh"]
+[ext_resource type="Script" path="res://scenes/tree.gd" id="1_g3yiw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fo5ks"]
 atlas = ExtResource("1_6fg6k")
@@ -42,17 +42,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_t0w4i"]
 radius = 22.2036
 
-[node name="Tree" type="Node2D"]
+[node name="Tree" type="StaticBody2D"]
+script = ExtResource("1_g3yiw")
 
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("1_u6csh")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
-position = Vector2(1, 0)
-scale = Vector2(0.554688, 0.575521)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -67)
 sprite_frames = SubResource("SpriteFrames_1qdxk")
 animation = &"wind"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 35)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t0w4i")
