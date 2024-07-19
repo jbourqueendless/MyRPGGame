@@ -1,7 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbxvsiri06nvv"]
+[gd_scene load_steps=60 format=3 uid="uid://dbxvsiri06nvv"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_x304v"]
 [ext_resource type="Texture2D" uid="uid://cbinf0rsnkxgw" path="res://assets/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="2_reh2e"]
+[ext_resource type="Script" path="res://scenes/player_animation.gd" id="3_dwm44"]
+[ext_resource type="Script" path="res://addons/block_code/block_code_node/block_code.gd" id="4_8hh5o"]
+[ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/serialized_block_tree_node.gd" id="5_dcge3"]
+[ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/serialized_block_tree_node_array.gd" id="5_fdovr"]
+[ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/serialized_block.gd" id="6_8qii4"]
+[ext_resource type="Script" path="res://addons/block_code/block_script_data/block_script_data.gd" id="6_ydgl0"]
+[ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/variable_resource.gd" id="9_k8vcf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d20po"]
 atlas = ExtResource("2_reh2e")
@@ -103,7 +110,240 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_8treo"]
 radius = 20.0998
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="Resource" id="Resource_enl4f"]
+script = ExtResource("6_8qii4")
+block_class = &"ParameterBlock"
+serialized_props = [["block_name", "parameter_block"], ["label", "Param"], ["color", Color(0.439216, 0.501961, 0.564706, 1)], ["block_type", 3], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Get input vector {negative_x: STRING} {positive_x: STRING} {negative_y: STRING} {positive_y: STRING}"], ["statement", "Input.get_vector({negative_x}, {positive_x}, {negative_y}, {positive_y})"], ["defaults", {}], ["variant_type", 5], ["param_input_strings", {
+"negative_x": "left",
+"negative_y": "up",
+"positive_x": "right",
+"positive_y": "down"
+}]]
+
+[sub_resource type="Resource" id="Resource_dn05i"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_enl4f")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_opoxl"]
+script = ExtResource("6_8qii4")
+block_class = &"ParameterBlock"
+serialized_props = [["block_name", "get_var_speed"], ["label", "Param"], ["color", Color(1, 0.560784, 0.0313726, 1)], ["block_type", 3], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "speed"], ["statement", "speed"], ["defaults", {}], ["variant_type", 3], ["param_input_strings", {}]]
+
+[sub_resource type="Resource" id="Resource_87ce4"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_opoxl")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_ljwt6"]
+script = ExtResource("6_8qii4")
+block_class = &"StatementBlock"
+serialized_props = [["block_name", "statement_block"], ["label", "StatementBlock"], ["color", Color(0.439216, 0.501961, 0.564706, 1)], ["block_type", 2], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Add movement input {input_vector: VECTOR2} and {speed: FLOAT}"], ["statement", "velocity = {input_vector}*{speed}
+move_and_slide()"], ["defaults", {}], ["param_input_strings", {
+"input_vector": ",",
+"speed": ""
+}]]
+
+[sub_resource type="Resource" id="Resource_f3n70"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_ljwt6")
+path_child_pairs = [[NodePath("VBoxContainer/TopMarginContainer/MarginContainer/HBoxContainer/ParameterInput0/SnapPoint"), SubResource("Resource_dn05i")], [NodePath("VBoxContainer/TopMarginContainer/MarginContainer/HBoxContainer/ParameterInput42/SnapPoint"), SubResource("Resource_87ce4")]]
+
+[sub_resource type="Resource" id="Resource_c2eq6"]
+script = ExtResource("6_8qii4")
+block_class = &"EntryBlock"
+serialized_props = [["block_name", "physics_process_block"], ["label", "EntryBlock"], ["color", Color(0.92549, 0.231373, 0.34902, 1)], ["block_type", 1], ["position", Vector2(525, 50)], ["scope", ""], ["block_format", "On Physics Process"], ["statement", "func _physics_process(delta):"], ["defaults", {}], ["param_input_strings", {}], ["signal_name", ""]]
+
+[sub_resource type="Resource" id="Resource_cfu6n"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_c2eq6")
+path_child_pairs = [[NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_f3n70")]]
+
+[sub_resource type="Resource" id="Resource_lnffw"]
+script = ExtResource("6_8qii4")
+block_class = &"StatementBlock"
+serialized_props = [["block_name", "set_var_speed"], ["label", "StatementBlock"], ["color", Color(1, 0.560784, 0.0313726, 1)], ["block_type", 2], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Set speed to {value: FLOAT}"], ["statement", "speed = {value}"], ["defaults", {}], ["param_input_strings", {
+"value": "300"
+}]]
+
+[sub_resource type="Resource" id="Resource_cc0g5"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_lnffw")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_farr1"]
+script = ExtResource("6_8qii4")
+block_class = &"EntryBlock"
+serialized_props = [["block_name", "ready_block"], ["label", "EntryBlock"], ["color", Color(0.92549, 0.231373, 0.34902, 1)], ["block_type", 1], ["position", Vector2(300, 50)], ["scope", ""], ["block_format", "On Ready"], ["statement", "func _ready():"], ["defaults", {}], ["param_input_strings", {}], ["signal_name", ""]]
+
+[sub_resource type="Resource" id="Resource_3xjbc"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_farr1")
+path_child_pairs = [[NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_cc0g5")]]
+
+[sub_resource type="Resource" id="Resource_n472r"]
+script = ExtResource("5_fdovr")
+array = [SubResource("Resource_cfu6n"), SubResource("Resource_3xjbc")]
+
+[sub_resource type="Resource" id="Resource_dsxou"]
+script = ExtResource("9_k8vcf")
+var_name = "speed"
+var_type = 3
+
+[sub_resource type="Resource" id="Resource_i2r8t"]
+script = ExtResource("6_ydgl0")
+script_inherits = "Player"
+block_trees = SubResource("Resource_n472r")
+variables = Array[ExtResource("9_k8vcf")]([SubResource("Resource_dsxou")])
+generated_script = "extends Player
+
+var speed: float
+
+
+func _physics_process(delta):
+	velocity = Input.get_vector('left', 'right', 'up', 'down')*speed
+	move_and_slide()
+
+func _ready():
+	speed = 300
+
+"
+version = 0
+
+[sub_resource type="Resource" id="Resource_dipa1"]
+script = ExtResource("6_8qii4")
+block_class = &"StatementBlock"
+serialized_props = [["block_name", "set_var_gold"], ["label", "StatementBlock"], ["color", Color(1, 0.560784, 0.0313726, 1)], ["block_type", 2], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Set gold to {value: INT}"], ["statement", "gold = {value}"], ["defaults", {}], ["param_input_strings", {
+"value": "0"
+}]]
+
+[sub_resource type="Resource" id="Resource_cijhy"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_dipa1")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_3yj3f"]
+script = ExtResource("6_8qii4")
+block_class = &"EntryBlock"
+serialized_props = [["block_name", "ready_block"], ["label", "EntryBlock"], ["color", Color(0.92549, 0.231373, 0.34902, 1)], ["block_type", 1], ["position", Vector2(100, 75)], ["scope", ""], ["block_format", "On Ready"], ["statement", "func _ready():"], ["defaults", {}], ["param_input_strings", {}], ["signal_name", ""]]
+
+[sub_resource type="Resource" id="Resource_bddyd"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_3yj3f")
+path_child_pairs = [[NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_cijhy")]]
+
+[sub_resource type="Resource" id="Resource_ipifo"]
+script = ExtResource("6_8qii4")
+block_class = &"ParameterBlock"
+serialized_props = [["block_name", "get_var_gold"], ["label", "Param"], ["color", Color(1, 0.560784, 0.0313726, 1)], ["block_type", 3], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "gold"], ["statement", "gold"], ["defaults", {}], ["variant_type", 2], ["param_input_strings", {}]]
+
+[sub_resource type="Resource" id="Resource_e7s4p"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_ipifo")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_sp5mu"]
+script = ExtResource("6_8qii4")
+block_class = &"ParameterBlock"
+serialized_props = [["block_name", "add_float"], ["label", "Param"], ["color", Color(0.647059, 0.368627, 0.917647, 1)], ["block_type", 3], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "{a: FLOAT} + {b: FLOAT}"], ["statement", "({a} + {b})"], ["defaults", {}], ["variant_type", 3], ["param_input_strings", {
+"a": "",
+"b": "1"
+}]]
+
+[sub_resource type="Resource" id="Resource_bnpw4"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_sp5mu")
+path_child_pairs = [[NodePath("MarginContainer/HBoxContainer/ParameterInput0/SnapPoint"), SubResource("Resource_e7s4p")]]
+
+[sub_resource type="Resource" id="Resource_m1ipv"]
+script = ExtResource("6_8qii4")
+block_class = &"ParameterBlock"
+serialized_props = [["block_name", "get_var_gold"], ["label", "Param"], ["color", Color(1, 0.560784, 0.0313726, 1)], ["block_type", 3], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "gold"], ["statement", "gold"], ["defaults", {}], ["variant_type", 2], ["param_input_strings", {}]]
+
+[sub_resource type="Resource" id="Resource_5u2ge"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_m1ipv")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_mwpgd"]
+script = ExtResource("6_8qii4")
+block_class = &"ParameterBlock"
+serialized_props = [["block_name", "add_string"], ["label", "Param"], ["color", Color(0.439216, 0.501961, 0.564706, 1)], ["block_type", 3], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "{string1: STRING} + {string2: STRING}"], ["statement", "{string1} + {string2}"], ["defaults", {}], ["variant_type", 4], ["param_input_strings", {
+"string1": "Gold: ",
+"string2": ""
+}]]
+
+[sub_resource type="Resource" id="Resource_c6nxd"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_mwpgd")
+path_child_pairs = [[NodePath("MarginContainer/HBoxContainer/ParameterInput17/SnapPoint"), SubResource("Resource_5u2ge")]]
+
+[sub_resource type="Resource" id="Resource_3308y"]
+script = ExtResource("6_8qii4")
+block_class = &"StatementBlock"
+serialized_props = [["block_name", "label_set_text"], ["label", "StatementBlock"], ["color", Color(0.439216, 0.501961, 0.564706, 1)], ["block_type", 2], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Set text {text: STRING}"], ["statement", "text = {text}"], ["defaults", {}], ["param_input_strings", {
+"text": ""
+}]]
+
+[sub_resource type="Resource" id="Resource_2c2of"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_3308y")
+path_child_pairs = [[NodePath("VBoxContainer/TopMarginContainer/MarginContainer/HBoxContainer/ParameterInput0/SnapPoint"), SubResource("Resource_c6nxd")]]
+
+[sub_resource type="Resource" id="Resource_5re47"]
+script = ExtResource("6_8qii4")
+block_class = &"StatementBlock"
+serialized_props = [["block_name", "set_var_gold"], ["label", "StatementBlock"], ["color", Color(1, 0.560784, 0.0313726, 1)], ["block_type", 2], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Set gold to {value: INT}"], ["statement", "gold = {value}"], ["defaults", {}], ["param_input_strings", {
+"value": ""
+}]]
+
+[sub_resource type="Resource" id="Resource_37edn"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_5re47")
+path_child_pairs = [[NodePath("VBoxContainer/TopMarginContainer/MarginContainer/HBoxContainer/ParameterInput0/SnapPoint"), SubResource("Resource_bnpw4")], [NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_2c2of")]]
+
+[sub_resource type="Resource" id="Resource_ju2yt"]
+script = ExtResource("6_8qii4")
+block_class = &"EntryBlock"
+serialized_props = [["block_name", "define_method"], ["label", "EntryBlock"], ["color", Color(0.294118, 0.482353, 0.92549, 1)], ["block_type", 1], ["position", Vector2(425, 75)], ["scope", ""], ["block_format", "Define method {method_name: NIL}"], ["statement", "func {method_name}():"], ["defaults", {}], ["param_input_strings", {
+"method_name": "add_gold"
+}], ["signal_name", ""]]
+
+[sub_resource type="Resource" id="Resource_nqf4h"]
+script = ExtResource("5_dcge3")
+serialized_block = SubResource("Resource_ju2yt")
+path_child_pairs = [[NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_37edn")]]
+
+[sub_resource type="Resource" id="Resource_3n4r3"]
+script = ExtResource("5_fdovr")
+array = Array[ExtResource("5_dcge3")]([SubResource("Resource_bddyd"), SubResource("Resource_nqf4h")])
+
+[sub_resource type="Resource" id="Resource_e1314"]
+script = ExtResource("9_k8vcf")
+var_name = "gold"
+var_type = 2
+
+[sub_resource type="Resource" id="Resource_5v6m8"]
+script = ExtResource("6_ydgl0")
+script_inherits = "Label"
+block_trees = SubResource("Resource_3n4r3")
+variables = Array[ExtResource("9_k8vcf")]([SubResource("Resource_e1314")])
+generated_script = "extends Label
+
+var gold: int
+
+
+func _ready():
+	gold = 0
+
+func add_gold():
+	gold = int((float(gold) + 1))
+	text = 'Gold: ' + str(gold)
+
+"
+version = 0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(587, 100)
 motion_mode = 1
 script = ExtResource("1_x304v")
@@ -113,6 +353,7 @@ position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_al0od")
 animation = &"idle"
 frame_progress = 0.533306
+script = ExtResource("3_dwm44")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
@@ -121,3 +362,31 @@ shape = SubResource("CircleShape2D_8treo")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -32)
 zoom = Vector2(1.2, 1.2)
+
+[node name="BlockCode" type="Node" parent="."]
+script = ExtResource("4_8hh5o")
+block_script = SubResource("Resource_i2r8t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GoldCounter" type="Label" parent="CanvasLayer/HUD" groups=["gold_counter"]]
+layout_mode = 0
+offset_left = 1057.0
+offset_top = 11.0
+offset_right = 1138.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 24
+text = "Gold: 0"
+
+[node name="BlockCode" type="Node" parent="CanvasLayer/HUD/GoldCounter"]
+script = ExtResource("4_8hh5o")
+block_script = SubResource("Resource_5v6m8")
