@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://6ibi568m4gd8"]
+
+[ext_resource type="PackedScene" uid="uid://bdo2b373wcrs2" path="res://scenes/tree.tscn" id="1_bvtyf"]
+[ext_resource type="PackedScene" uid="uid://bsrgd0salko6m" path="res://assets/Tiny Swords (Update 010)/Resources/Trees/tree.tscn" id="2_74sex"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Tree" parent="." instance=ExtResource("1_bvtyf")]
+position = Vector2(117, 197)
+
+[node name="Tree2" parent="." instance=ExtResource("1_bvtyf")]
+position = Vector2(153, 242)
+
+[node name="Tree3" parent="." instance=ExtResource("1_bvtyf")]
+position = Vector2(198, 289)
+
+[node name="Tree4" parent="." instance=ExtResource("1_bvtyf")]
+position = Vector2(132, 295)
+
+[node name="Tree5" parent="." instance=ExtResource("1_bvtyf")]
+position = Vector2(204, 172)
+
+[node name="Tree6" parent="." instance=ExtResource("2_74sex")]
+position = Vector2(75, 258)
+
+[node name="Tree7" parent="." instance=ExtResource("2_74sex")]
+position = Vector2(288, 213)
