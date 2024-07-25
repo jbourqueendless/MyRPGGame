@@ -521,6 +521,14 @@ static func get_general_blocks() -> Array[Block]:
 
 #endregion
 
+	b = BLOCKS["statement_block"].instantiate()
+	b.block_name = "start_dialog"
+	b.block_type = Types.BlockType.EXECUTE
+	b.block_format = "Start dialog {name: STRING}"
+	b.statement = "Dialogic.start({name})"
+	b.category = "Dialog"
+	block_list.append(b)
+
 	return block_list
 
 
@@ -756,6 +764,15 @@ static func get_built_in_blocks(_class_name: String) -> Array[Block]:
 			props = {
 				"velocity": "Physics | Velocity",
 			}
+			
+		"Label":
+			var b = BLOCKS["statement_block"].instantiate()
+			b.block_name = "set_text"
+			b.block_type = Types.BlockType.EXECUTE
+			b.block_format = "Set text {text: STRING}"
+			b.statement = "text = {text}"
+			b.category = "Label"
+			block_list.append(b)
 
 	var prop_list = ClassDB.class_get_property_list(_class_name, true)
 	block_list.append_array(blocks_from_property_list(prop_list, props))

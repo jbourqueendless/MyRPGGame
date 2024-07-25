@@ -183,7 +183,7 @@ path_child_pairs = [[NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_
 
 [sub_resource type="Resource" id="Resource_n472r"]
 script = ExtResource("5_fdovr")
-array = [SubResource("Resource_cfu6n"), SubResource("Resource_3xjbc")]
+array = Array[ExtResource("5_dcge3")]([SubResource("Resource_cfu6n"), SubResource("Resource_3xjbc")])
 
 [sub_resource type="Resource" id="Resource_dsxou"]
 script = ExtResource("9_k8vcf")

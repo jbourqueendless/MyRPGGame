@@ -2,6 +2,8 @@
 class_name Player
 extends CharacterBody2D
 
+const Types = preload("res://addons/block_code/types/types.gd")
+
 func get_custom_class():
 	return "Player"
 
