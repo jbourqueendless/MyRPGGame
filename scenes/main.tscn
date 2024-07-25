@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://uri0qsgy4be6"]
+[gd_scene load_steps=55 format=3 uid="uid://uri0qsgy4be6"]
 
 [ext_resource type="Texture2D" uid="uid://dd48e7ad4oukc" path="res://assets/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="1_3dw2o"]
 [ext_resource type="Texture2D" uid="uid://bo714ijtann1n" path="res://assets/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png" id="2_7bd8r"]
@@ -773,6 +773,46 @@ func _init():
 "
 version = 0
 
+[sub_resource type="Resource" id="Resource_4vd4p"]
+script = ExtResource("8_ln4ln")
+block_class = &"StatementBlock"
+serialized_props = [["block_name", "start_dialog"], ["label", "StatementBlock"], ["color", Color(0.439216, 0.501961, 0.564706, 1)], ["block_type", 2], ["position", Vector2(0, 0)], ["scope", ""], ["block_format", "Start dialog {name: STRING}"], ["statement", "Dialogic.start({name})"], ["defaults", {}], ["param_input_strings", {
+"name": "welcome"
+}]]
+
+[sub_resource type="Resource" id="Resource_3fson"]
+script = ExtResource("7_xs4h1")
+serialized_block = SubResource("Resource_4vd4p")
+path_child_pairs = []
+
+[sub_resource type="Resource" id="Resource_w1uh1"]
+script = ExtResource("8_ln4ln")
+block_class = &"EntryBlock"
+serialized_props = [["block_name", "ready_block"], ["label", "EntryBlock"], ["color", Color(0.92549, 0.231373, 0.34902, 1)], ["block_type", 1], ["position", Vector2(75, 50)], ["scope", ""], ["block_format", "On Ready"], ["statement", "func _ready():"], ["defaults", {}], ["param_input_strings", {}], ["signal_name", ""]]
+
+[sub_resource type="Resource" id="Resource_n6i1m"]
+script = ExtResource("7_xs4h1")
+serialized_block = SubResource("Resource_w1uh1")
+path_child_pairs = [[NodePath("VBoxContainer/SnapPoint"), SubResource("Resource_3fson")]]
+
+[sub_resource type="Resource" id="Resource_nhbda"]
+script = ExtResource("9_8pr0q")
+array = Array[ExtResource("7_xs4h1")]([SubResource("Resource_n6i1m")])
+
+[sub_resource type="Resource" id="Resource_qk4hn"]
+script = ExtResource("10_5omec")
+script_inherits = "Node2D"
+block_trees = SubResource("Resource_nhbda")
+variables = Array[Resource("res://addons/block_code/ui/block_canvas/variable_resource.gd")]([])
+generated_script = "extends Node2D
+
+
+func _ready():
+	Dialogic.start('welcome')
+
+"
+version = 0
+
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -794,7 +834,7 @@ layer_5/tile_data = PackedInt32Array(393213, 0, 2, 327677, 0, 1, 262141, 0, 1, 1
 [node name="GameLayer" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="GameLayer" groups=["player"] instance=ExtResource("5_yfd7i")]
+[node name="Player" parent="GameLayer" instance=ExtResource("5_yfd7i")]
 
 [node name="Tree" parent="GameLayer" instance=ExtResource("4_wdxjy")]
 position = Vector2(-6, 115)
@@ -871,3 +911,7 @@ position = Vector2(-1438, -974)
 
 [node name="forest3" parent="." instance=ExtResource("13_oe2fc")]
 position = Vector2(-4093, -820)
+
+[node name="BlockCode" type="Node" parent="."]
+script = ExtResource("6_rktum")
+block_script = SubResource("Resource_qk4hn")
