@@ -806,6 +806,9 @@ rotation = 0.0619826
 [node name="forest5" parent="GameLayer/Forest Group" instance=ExtResource("13_oe2fc")]
 position = Vector2(268, -8553)
 
+[node name="forest7" parent="GameLayer/Forest Group" instance=ExtResource("13_oe2fc")]
+position = Vector2(-444, -8310)
+
 [node name="StaticBody2D" parent="." instance=ExtResource("11_ks1bw")]
 position = Vector2(-2549, -673)
 
