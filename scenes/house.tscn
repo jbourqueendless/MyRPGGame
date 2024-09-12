@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://mouufr11oe2a" path="res://assets/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Blue.png" id="1_2wp0k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jkii"]
-size = Vector2(239, 286)
+size = Vector2(394.5, 493)
 
 [node name="StaticBody2D" type="StaticBody2D"]
 
@@ -13,5 +13,5 @@ scale = Vector2(2.41406, 2.24479)
 texture = ExtResource("1_2wp0k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(152.5, -83)
+position = Vector2(220.75, 12.5)
 shape = SubResource("RectangleShape2D_5jkii")
