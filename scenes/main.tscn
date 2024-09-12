@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://uri0qsgy4be6"]
+[gd_scene load_steps=61 format=4 uid="uid://uri0qsgy4be6"]
 
 [ext_resource type="Texture2D" uid="uid://dd48e7ad4oukc" path="res://assets/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="1_3dw2o"]
 [ext_resource type="Texture2D" uid="uid://bo714ijtann1n" path="res://assets/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png" id="2_7bd8r"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://6ibi568m4gd8" path="res://scenes/tree cluster.tscn" id="7_iiagn"]
 [ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/serialized_block_tree_node.gd" id="7_xs4h1"]
 [ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/serialized_block.gd" id="8_ln4ln"]
+[ext_resource type="PackedScene" uid="uid://y1fvbnt0c56w" path="res://bluegoblin.tscn" id="8_xtdga"]
 [ext_resource type="Script" path="res://addons/block_code/ui/block_canvas/serialized_block_tree_node_array.gd" id="9_8pr0q"]
 [ext_resource type="Script" path="res://addons/block_code/block_script_data/block_script_data.gd" id="10_5omec"]
 [ext_resource type="PackedScene" uid="uid://bjh4rwfx5ff0n" path="res://scenes/house.tscn" id="11_ks1bw"]
@@ -422,6 +423,44 @@ sources/0 = SubResource("TileSetAtlasSource_istk1")
 sources/1 = SubResource("TileSetAtlasSource_388i0")
 sources/2 = SubResource("TileSetAtlasSource_ujorn")
 
+[sub_resource type="Animation" id="Animation_4glmg"]
+resource_name = "Patrol"
+length = 6.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.96667, 3.96667, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2735, -7532), Vector2(-1235, -7582), Vector2(-2029, -6959), Vector2(-2837, -7724)]
+}
+
+[sub_resource type="Animation" id="Animation_7iwej"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2735, -7532)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_af1yh"]
+_data = {
+"Patrol": SubResource("Animation_4glmg"),
+"RESET": SubResource("Animation_7iwej")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_taama"]
 radius = 2238.65
 
@@ -808,6 +847,16 @@ position = Vector2(268, -8553)
 
 [node name="forest7" parent="GameLayer/Forest Group" instance=ExtResource("13_oe2fc")]
 position = Vector2(-444, -8310)
+
+[node name="CharacterBody2D" parent="GameLayer" instance=ExtResource("8_xtdga")]
+position = Vector2(-2735, -7532)
+scale = Vector2(2, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameLayer/CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_af1yh")
+}
+autoplay = "Patrol"
 
 [node name="StaticBody2D" parent="." instance=ExtResource("11_ks1bw")]
 position = Vector2(-2549, -673)
