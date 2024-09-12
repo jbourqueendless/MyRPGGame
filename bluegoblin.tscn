@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://y1fvbnt0c56w"]
+
+[ext_resource type="Texture2D" uid="uid://d0u7kn22pl1fa" path="res://assets/Tiny Swords (Update 010)/Factions/Goblins/Troops/Torch/Blue/Torch_Blue.png" id="1_5al81"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0c14"]
+radius = 34.1321
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quqoe"]
+atlas = ExtResource("1_5al81")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rub8"]
+atlas = ExtResource("1_5al81")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6w5e"]
+atlas = ExtResource("1_5al81")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nolqd"]
+atlas = ExtResource("1_5al81")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvof2"]
+atlas = ExtResource("1_5al81")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8qcq"]
+atlas = ExtResource("1_5al81")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywnoy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quqoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rub8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6w5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nolqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvof2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8qcq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n0c14")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.99999, -38)
+scale = Vector2(1.375, 1.40104)
+sprite_frames = SubResource("SpriteFrames_ywnoy")
+autoplay = "default"
+frame = 1
+frame_progress = 0.805916
